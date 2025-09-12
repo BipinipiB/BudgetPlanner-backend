@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlanner.Backend", "Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlanner.DataAccess", "BudgetPlanner.DataAccess\BudgetPlanner.DataAccess.csproj", "{D0BDA9A3-4DAF-4781-B301-E80003710842}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlanner.Model", "BudgetPlanner.Model\BudgetPlanner.Model.csproj", "{F9137657-FCC8-4517-AB63-BBFC0EA74386}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlanner.Models", "BudgetPlanner.Model\BudgetPlanner.Models.csproj", "{F9137657-FCC8-4517-AB63-BBFC0EA74386}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlanner.Service", "BudgetPlanner.Service\BudgetPlanner.Service.csproj", "{8DCE4268-1D2C-4550-A516-1B2F41EC6BAD}"
 EndProject
