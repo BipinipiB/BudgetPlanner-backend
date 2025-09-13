@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BudgetPlanner.Models.DTOs;
+using BudgetPlanner.Service.ServiceInterface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
@@ -9,23 +11,33 @@ namespace BudgetPlanner.Backend.Controllers
     public class BudgetPlannerController : ControllerBase
     {
 
+        private static IExpenseService _expenseService;
+
+        public BudgetPlannerController(IExpenseService expenseService)
+        {
+            _expenseService = expenseService;
+        }
+
         [HttpGet("GetExpenses")]
-        public async Task<IActionResult> GetExpenses()
+        public async Task<IActionResult> GetAllExpenses()
         {
 
-            return Ok(await GetExpenses());
+            return Ok(await _expenseService.GetAllExpenses());
         }
 
         [HttpPost("AddExpenses")]
-        public async Task<IActionResult> AddExpense()
+        public async Task<IActionResult> AddExpense(ExpenseDto expenseDto)
         {
+
+            await _expenseService.AddExpense(expenseDto);
             return Ok();
         }
 
         [HttpPut("UpdateExpense")]
 
-        public async Task<ActionResult> UpdateExpense()
+        public async Task<ActionResult> UpdateExpense(ExpenseDto updateObject)
         {
+            await _expenseService.UpdateExpense(updateObject);
             return Ok();
         }
 
@@ -33,6 +45,7 @@ namespace BudgetPlanner.Backend.Controllers
 
         public async Task<IActionResult> DeleteExpense(int id)
         {
+            await _expenseService.DeleteExpense(id);
             return Ok();
         }
     }

@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BudgetPlanner.DataAccess\BudgetPlanner.DataAccess.csproj" />
+    <ProjectReference Include="..\BudgetPlanner.Model\BudgetPlanner.Models.csproj" />
+  </ItemGroup>
+
 </Project>
