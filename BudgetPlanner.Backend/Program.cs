@@ -22,6 +22,24 @@ builder.Services.AddScoped<IExpenseRepo, ExpenseRepo>();
 //register Services
 builder.Services.AddScoped<IExpenseService, ExpenseService> ();
 
+//register OpenAIService
+builder.Services.AddSingleton<IOpenAIService,OpenAIService>();
+
+
+
+//Enable CORS
+//CORS allows frontend origins
+//Telling your security guard that its okay to let request from followin origin is safe
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowJSApp",
+        builder => builder
+            .WithOrigins("http://127.0.0.1:5500")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,7 +48,11 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+
+
 app.UseHttpsRedirection();
+
+app.UseCors("AllowJSApp");
 
 app.UseAuthorization();
 

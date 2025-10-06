@@ -12,10 +12,12 @@ namespace BudgetPlanner.Backend.Controllers
     {
 
         private static IExpenseService _expenseService;
+        private static IOpenAIService openAIServicelocal;
 
-        public BudgetPlannerController(IExpenseService expenseService)
+        public BudgetPlannerController(IExpenseService expenseService,IOpenAIService _openAIService)
         {
             _expenseService = expenseService;
+            openAIServicelocal = _openAIService;
         }
 
         [HttpGet("GetExpenses")]
@@ -48,5 +50,13 @@ namespace BudgetPlanner.Backend.Controllers
             await _expenseService.DeleteExpense(id);
             return Ok();
         }
+
+        [HttpGet("GetExpenseCatgegory")]
+        public async Task<IActionResult> GetExpenseCategory(string expenseName)
+        {
+
+            return Ok(await openAIServicelocal.AskAIForCategory(expenseName));
+        }
+
     }
 }

@@ -17,6 +17,8 @@ namespace BudgetPlanner.Model.Entity
         public float Amount { get; set; }
 
         public DateTime SpentOn { get; set; }
+
+        public string Category { get; set; }
     }
 
 }

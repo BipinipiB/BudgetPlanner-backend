@@ -15,12 +15,14 @@ namespace BudgetPlanner.Service.Service
     {
 
         public  IExpenseRepo _expenseRepo;
+        public  IOpenAIService _openAIService;
 
 
-        public ExpenseService(IExpenseRepo expenseRepo)
+        public ExpenseService(IExpenseRepo expenseRepo, IOpenAIService openAIService)
         {
 
             _expenseRepo = expenseRepo;
+            _openAIService = openAIService;
 
         }
 
@@ -45,7 +47,10 @@ namespace BudgetPlanner.Service.Service
         public async Task AddExpense(ExpenseDto expenseDto)
         {
 
-            if(expenseDto.Expensename == ""){
+            string expenseCateogory = await _openAIService.AskAIForCategory(expenseDto.Expensename);
+
+
+            if (expenseDto.Expensename == ""){
                     new Exception("Expense name required");
             }
             else if (expenseDto.Amount == null )
@@ -62,7 +67,8 @@ namespace BudgetPlanner.Service.Service
                 {
                     Amount = expenseDto.Amount,
                     Name = expenseDto.Expensename,
-                    SpentOn = expenseDto.SpentOn
+                    SpentOn = expenseDto.SpentOn,
+                    Category = expenseCateogory
                 };
 
                 await _expenseRepo.AddExpense(expense);
